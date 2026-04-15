@@ -1,0 +1,67 @@
+// Toggle Forms
+function showRegister() {
+  document.getElementById("loginBox").classList.add("hidden");
+  document.getElementById("registerBox").classList.remove("hidden");
+}
+
+function showLogin() {
+  document.getElementById("registerBox").classList.add("hidden");
+  document.getElementById("loginBox").classList.remove("hidden");
+}
+
+// Show/Hide Password
+function togglePassword(id) {
+  let field = document.getElementById(id);
+  field.type = field.type === "password" ? "text" : "password";
+}
+
+// Password Strength
+function checkStrength() {
+  let pass = document.getElementById("pass").value;
+  let strength = document.getElementById("strength");
+
+  if (pass.length < 6) {
+    strength.style.background = "red";
+    strength.style.width = "30%";
+  } else if (pass.length < 10) {
+    strength.style.background = "orange";
+    strength.style.width = "60%";
+  } else {
+    strength.style.background = "green";
+    strength.style.width = "100%";
+  }
+}
+
+// Dummy AJAX Username Check
+function checkUsername() {
+  let username = document.getElementById("username").value;
+  let msg = document.getElementById("userMsg");
+
+  setTimeout(() => {
+    if (username === "admin") {
+      msg.innerText = "Username already taken ❌";
+      msg.style.color = "red";
+    } else {
+      msg.innerText = "Username available ✅";
+      msg.style.color = "lightgreen";
+    }
+  }, 500);
+}
+
+// Register Validation
+document.getElementById("registerForm").onsubmit = function(e) {
+  let pass = document.getElementById("pass").value;
+  let confirm = document.getElementById("confirmPass").value;
+
+  if (pass !== confirm) {
+    alert("Passwords do not match!");
+    e.preventDefault();
+  } else {
+    alert("Registration Successful!");
+  }
+};
+
+// Login Validation
+document.getElementById("loginForm").onsubmit = function(e) {
+  alert("Login Successful!");
+};
